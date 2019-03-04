@@ -100,11 +100,14 @@ public class SpeedWindow extends JFrame {
 		return x;
 	}
 	
+
+	
 	public void createPairs() {
 		int maxAnz;
 		int menEingabe = readText()[0];
 		int womenEingabe = readText()[1];
 		
+	
 		// Anzahl der Herren im Array
 		int[] menArray = new int[menEingabe];
 		for (int i= 1; i<= readText()[0]; i++) {
@@ -117,7 +120,7 @@ public class SpeedWindow extends JFrame {
 		}
 		maxAnz = Math.min(menArray.length, womenArray.length);
 		
-		// Paare zusammenfügen
+		// Paare zusammenfï¿½gen
 		int[][] activePairs = new int[maxAnz][2];
 		
 			pairMemory = new int [maxAnz][2];
@@ -127,21 +130,21 @@ public class SpeedWindow extends JFrame {
 			System.out.println("For-Schleife Count: "+ i);
 			int rndMan = menArray[rng.nextInt(menArray.length)];
 			int rndWoman = womenArray[rng.nextInt(womenArray.length)];
-			System.out.println("Länge des Männer Arrays: "+ menArray.length);
+			System.out.println("Lï¿½nge des Mï¿½nner Arrays: "+ menArray.length);
 			System.out.println("Random Man:  "+ rndMan);
 			System.out.println("Random Woman:  "+ rndWoman);
 			
 			while (vorhandeneZahl(0, rndMan,pairMemory)==true){
 				rndMan = menArray[rng.nextInt(menArray.length)];
-				System.out.println("Neue Zufällige Mann: "+rndMan);
+				System.out.println("Neue Zufï¿½llige Mann: "+rndMan);
 			}
 				activePairs[i][0]= rndMan;
 				pairMemory[i][0]= rndMan;	
-				System.out.println(" Männer aus PairMemory: " + pairMemory[i][0]);
+				System.out.println(" Mï¿½nner aus PairMemory: " + pairMemory[i][0]);
 			
 			while (vorhandeneZahl(1, rndWoman,pairMemory)==true) {
 				rndWoman = womenArray[rng.nextInt(womenArray.length)];
-				System.out.println("Neue Zufällige Frau: "+rndWoman);
+				System.out.println("Neue Zufï¿½llige Frau: "+rndWoman);
 			}			
 				activePairs[i][1]= rndWoman;
 				pairMemory[i][1]= rndWoman;		
@@ -165,13 +168,32 @@ public class SpeedWindow extends JFrame {
 			}
 		return bool;
 	}
+	
+	int rundenZaehler=0;
+	BackendLogic cooleLogik = new BackendLogic();
 	public void printPairs(int [][] paarListe) {
-		String FinalAusgabe = "";
-		for (int i=0; i<paarListe.length; i++) {
-			FinalAusgabe = FinalAusgabe + "\n" + paarListe[i][0] + "  " + paarListe[i][1];
-			System.out.println(paarListe[i][0] + "  " + paarListe[i][1]);
-		}
-		FinalAusgabe = "Paare: " + FinalAusgabe;
-		paarAusgabe.setText(FinalAusgabe);
+		String finalAusgabe = "";
+		 int anzahlMaenner = readText()[0];
+		 int anzahlFrauen = readText()[1];
+		 cooleLogik.setAnzahlFrauen(anzahlFrauen);
+		 cooleLogik.setAnzahlMaenner(anzahlMaenner);
+		 if (rundenZaehler==0) {
+			 cooleLogik.initialisiereSpeicher();
+			 rundenZaehler+=1;
+		 }
+		
+		 
+
+//		for (int i=0; i<paarListe.length; i++) {
+//			FinalAusgabe = FinalAusgabe + "\n" + paarListe[i][0] + "  " + paarListe[i][1];
+//			System.out.println(paarListe[i][0] + "  " + paarListe[i][1]);
+//		}
+//		FinalAusgabe = "Paare: " + FinalAusgabe;
+		
+		
+		
+		finalAusgabe= cooleLogik.starteMatching();
+		
+		paarAusgabe.setText(finalAusgabe);
 	}
 }
