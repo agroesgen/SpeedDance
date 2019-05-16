@@ -1,5 +1,4 @@
 import java.util.LinkedList;
-import java.util.List;
 
 public class BackendLogic {
 	
@@ -37,6 +36,8 @@ public class BackendLogic {
 	public String starteMatching () {
 		String aktuellePaare="";
 		LinkedList<Integer> bereitsGewaehlteFrauen = new LinkedList<Integer>();
+		if (speicherVonPaaren == null)
+			initialisiereSpeicher();
 		for (int i=0;i<speicherVonPaaren.size();i++) {
 			LinkedList<Integer> bereitsGematchtePaare=speicherVonPaaren.get(i);
 			int randomFrau = (int) ((Math.random()*100)%anzahlFrauen)+1;

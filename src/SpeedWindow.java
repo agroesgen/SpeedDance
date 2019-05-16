@@ -2,9 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -25,10 +22,7 @@ public class SpeedWindow extends JFrame {
 	JTextField txHerren, txDamen;
 	JTextArea paarAusgabe;
 	Random rng = new Random();
-	int [][] pairMemory, activePairs ;
-	static List<Paar> Memory = new ArrayList<>();
 	int maxAnz;
-	int [] menArray, womenArray;
 	
 	public SpeedWindow(ActionListener listener) {
 		setTitle("Speed Dance");
@@ -106,140 +100,109 @@ public class SpeedWindow extends JFrame {
 		return x;
 	}
 	
-<<<<<<< HEAD
-	public void start() {
-		createPairs();
-	}
-	
-	public void readEingabe() {
-=======
+
 
 	
-	public void createPairs() {
-		int maxAnz;
->>>>>>> 2fe8871ead09c7edb681c7eb81e8a45ac5c74957
-		int menEingabe = readText()[0];
-		int womenEingabe = readText()[1];
-		
-	
-		// Anzahl der Herren im Array
-		menArray = new int[menEingabe];
-		for (int i= 1; i<= readText()[0]; i++) {
-			menArray[i-1] = i;
-		}
-		// Anzahl der Damen im Array
-		womenArray = new int[womenEingabe];
-		for (int i= 1; i<= readText()[1]; i++) {
-			womenArray[i-1] = i;
-		}
-<<<<<<< HEAD
-		maxAnz = Math.min(menArray.length, womenArray.length);		
-		activePairs = new int[maxAnz][2];
-	}
-	public void createPairs() {
-			
-		readEingabe();
-		for (int i = Memory.size(); i<maxAnz; i++) { // Paar Index
-				createPaar(i);
-			System.out.println(Arrays.toString(Memory.get(i).getPair()));
-			while (vorhandenesPaar(Memory.get(i))==true) {
-				Memory.remove(i);
-				createPaar(i);
-			}
-			
-=======
-		maxAnz = Math.min(menArray.length, womenArray.length);
-		
-		// Paare zusammenf�gen
-		int[][] activePairs = new int[maxAnz][2];
-		
-			pairMemory = new int [maxAnz][2];
-		
-		for (int i=0; i<maxAnz; i++) {
-			
-			System.out.println("For-Schleife Count: "+ i);
-			int rndMan = menArray[rng.nextInt(menArray.length)];
-			int rndWoman = womenArray[rng.nextInt(womenArray.length)];
-			System.out.println("L�nge des M�nner Arrays: "+ menArray.length);
-			System.out.println("Random Man:  "+ rndMan);
-			System.out.println("Random Woman:  "+ rndWoman);
-			
-			while (vorhandeneZahl(0, rndMan,pairMemory)==true){
-				rndMan = menArray[rng.nextInt(menArray.length)];
-				System.out.println("Neue Zuf�llige Mann: "+rndMan);
-			}
-				activePairs[i][0]= rndMan;
-				pairMemory[i][0]= rndMan;	
-				System.out.println(" M�nner aus PairMemory: " + pairMemory[i][0]);
-			
-			while (vorhandeneZahl(1, rndWoman,pairMemory)==true) {
-				rndWoman = womenArray[rng.nextInt(womenArray.length)];
-				System.out.println("Neue Zuf�llige Frau: "+rndWoman);
-			}			
-				activePairs[i][1]= rndWoman;
-				pairMemory[i][1]= rndWoman;		
-				System.out.println("Frauem aus PairMemory: "+ pairMemory[i][1]);
->>>>>>> 2fe8871ead09c7edb681c7eb81e8a45ac5c74957
-		}
-		printPairs(activePairs);
-	}
-		
-	public static boolean personVergeben(int gender, int clone, int[][] Array) {
-		
-		boolean bool= true;
-			for (int i[] : Array) {
-				System.out.println("Vorhandene Zahl Array Wert: "+ i[gender]);
-				if (clone == i[gender]) {
-					bool = true;
-					break;
-				}
-				else
-					bool = false;
-					System.out.println(bool);
-			}
-			return bool;
-	}
-	public void createPaar(int paarIndex){
-		
-		int rndMan = menArray[rng.nextInt(menArray.length)];
-		int rndWoman = womenArray[rng.nextInt(womenArray.length)];
-		
-		while (personVergeben(0, rndMan,activePairs)==true) {
-			rndMan = menArray[rng.nextInt(menArray.length)];
-		}
-		activePairs[paarIndex][0]=rndMan;
-		
-		while (personVergeben(1, rndWoman,activePairs)==true) {
-		rndWoman = womenArray[rng.nextInt(womenArray.length)];			
-		}
-		activePairs[paarIndex][1]=rndWoman;
-		
-		Memory.add(new Paar(rndMan,rndWoman));
-	}
-	public static boolean vorhandenesPaar(Paar testPaar) {
-		boolean bool = false;
-		for (Paar clone : Memory)
-			if (clone.getPair() == testPaar.getPair()) {
-				bool = true;
-				return bool;
-			}
-			else
-				bool = false;
-		return bool;
-	}
+//	public void createPairs() {
+//		int maxAnz;
+//		int menEingabe = readText()[0];
+//		int womenEingabe = readText()[1];
+//		
+//	
+//		// Anzahl der Herren im Array
+//		menArray = new int[menEingabe];
+//		for (int i= 1; i<= readText()[0]; i++) {
+//			menArray[i-1] = i;
+//		}
+//		// Anzahl der Damen im Array
+//		womenArray = new int[womenEingabe];
+//		for (int i= 1; i<= readText()[1]; i++) {
+//			womenArray[i-1] = i;
+//		}
+//
+//		maxAnz = Math.min(menArray.length, womenArray.length);
+//		
+//		// Paare zusammenf�gen
+//		int[][] activePairs = new int[maxAnz][2];
+//		
+//			pairMemory = new int [maxAnz][2];
+//		
+//		for (int i=0; i<maxAnz; i++) {
+//			
+//			System.out.println("For-Schleife Count: "+ i);
+//			int rndMan = menArray[rng.nextInt(menArray.length)];
+//			int rndWoman = womenArray[rng.nextInt(womenArray.length)];
+//			System.out.println("L�nge des M�nner Arrays: "+ menArray.length);
+//			System.out.println("Random Man:  "+ rndMan);
+//			System.out.println("Random Woman:  "+ rndWoman);
+//			
+//			while (vorhandeneZahl(0, rndMan,pairMemory)==true){
+//				rndMan = menArray[rng.nextInt(menArray.length)];
+//				System.out.println("Neue Zuf�llige Mann: "+rndMan);
+//			}
+//				activePairs[i][0]= rndMan;
+//				pairMemory[i][0]= rndMan;	
+//				System.out.println(" M�nner aus PairMemory: " + pairMemory[i][0]);
+//			
+//			while (vorhandeneZahl(1, rndWoman,pairMemory)==true) {
+//				rndWoman = womenArray[rng.nextInt(womenArray.length)];
+//				System.out.println("Neue Zuf�llige Frau: "+rndWoman);
+//			}			
+//				activePairs[i][1]= rndWoman;
+//				pairMemory[i][1]= rndWoman;		
+//				System.out.println("Frauem aus PairMemory: "+ pairMemory[i][1]);
+//		}
+//		printPairs(activePairs);
+//	}
+//		
+//	public static boolean personVergeben(int gender, int clone, int[][] Array) {
+//		
+//		boolean bool= true;
+//			for (int i[] : Array) {
+//				System.out.println("Vorhandene Zahl Array Wert: "+ i[gender]);
+//				if (clone == i[gender]) {
+//					bool = true;
+//					break;
+//				}
+//				else
+//					bool = false;
+//					System.out.println(bool);
+//			}
+//			return bool;
+//	}
+//	public void createPaar(int paarIndex){
+//		
+//		int rndMan = menArray[rng.nextInt(menArray.length)];
+//		int rndWoman = womenArray[rng.nextInt(womenArray.length)];
+//		
+//		while (personVergeben(0, rndMan,activePairs)==true) {
+//			rndMan = menArray[rng.nextInt(menArray.length)];
+//		}
+//		activePairs[paarIndex][0]=rndMan;
+//		
+//		while (personVergeben(1, rndWoman,activePairs)==true) {
+//		rndWoman = womenArray[rng.nextInt(womenArray.length)];			
+//		}
+//		activePairs[paarIndex][1]=rndWoman;
+//		
+//		Memory.add(new Paar(rndMan,rndWoman));
+//	}
+//	public static boolean vorhandenesPaar(Paar testPaar) {
+//		boolean bool = false;
+//		for (Paar clone : Memory)
+//			if (clone.getPair() == testPaar.getPair()) {
+//				bool = true;
+//				return bool;
+//			}
+//			else
+//				bool = false;
+//		return bool;
+//	}
 	
 	int rundenZaehler=0;
 	BackendLogic cooleLogik = new BackendLogic();
 	public void printPairs(int [][] paarListe) {
-<<<<<<< HEAD
-		String FinalAusgabe = "";
-		for (int i=0; i<paarListe.length; i++) {
-			FinalAusgabe = FinalAusgabe + "\n" + paarListe[i][0] + "    " + paarListe[i][1];
-			System.out.println(paarListe[i][0] + "  " + paarListe[i][1]);
-		}
-		FinalAusgabe = "Paare: " + FinalAusgabe;
-		paarAusgabe.setText(FinalAusgabe);
-=======
+
 		String finalAusgabe = "";
 		 int anzahlMaenner = readText()[0];
 		 int anzahlFrauen = readText()[1];
@@ -263,6 +226,5 @@ public class SpeedWindow extends JFrame {
 		finalAusgabe= cooleLogik.starteMatching();
 		
 		paarAusgabe.setText(finalAusgabe);
->>>>>>> 2fe8871ead09c7edb681c7eb81e8a45ac5c74957
 	}
 }

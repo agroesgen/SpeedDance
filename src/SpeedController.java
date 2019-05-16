@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 public class SpeedController implements ActionListener {
 
 	SpeedWindow win;
+	BackendLogic logic = new BackendLogic();
 	
 	public void start() {
 		win = new SpeedWindow(this);
@@ -14,13 +15,13 @@ public class SpeedController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
+		
 		System.out.println(command);
 		if (command.equals("Zuordnen")) {
-			
-			System.out.println(""+ win.readText()[0] + "   " + win.readText()[1]);
+			logic.setAnzahlFrauen(win.readText()[1]);
+			logic.setAnzahlMaenner(win.readText()[0]);
+			System.out.println(logic.starteMatching());
 		}
-		
-		win.start();
 	}
 	
 }
