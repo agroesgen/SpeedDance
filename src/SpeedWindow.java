@@ -106,14 +106,22 @@ public class SpeedWindow extends JFrame {
 		return x;
 	}
 	
+<<<<<<< HEAD
 	public void start() {
 		createPairs();
 	}
 	
 	public void readEingabe() {
+=======
+
+	
+	public void createPairs() {
+		int maxAnz;
+>>>>>>> 2fe8871ead09c7edb681c7eb81e8a45ac5c74957
 		int menEingabe = readText()[0];
 		int womenEingabe = readText()[1];
 		
+	
 		// Anzahl der Herren im Array
 		menArray = new int[menEingabe];
 		for (int i= 1; i<= readText()[0]; i++) {
@@ -124,6 +132,7 @@ public class SpeedWindow extends JFrame {
 		for (int i= 1; i<= readText()[1]; i++) {
 			womenArray[i-1] = i;
 		}
+<<<<<<< HEAD
 		maxAnz = Math.min(menArray.length, womenArray.length);		
 		activePairs = new int[maxAnz][2];
 	}
@@ -138,6 +147,39 @@ public class SpeedWindow extends JFrame {
 				createPaar(i);
 			}
 			
+=======
+		maxAnz = Math.min(menArray.length, womenArray.length);
+		
+		// Paare zusammenf�gen
+		int[][] activePairs = new int[maxAnz][2];
+		
+			pairMemory = new int [maxAnz][2];
+		
+		for (int i=0; i<maxAnz; i++) {
+			
+			System.out.println("For-Schleife Count: "+ i);
+			int rndMan = menArray[rng.nextInt(menArray.length)];
+			int rndWoman = womenArray[rng.nextInt(womenArray.length)];
+			System.out.println("L�nge des M�nner Arrays: "+ menArray.length);
+			System.out.println("Random Man:  "+ rndMan);
+			System.out.println("Random Woman:  "+ rndWoman);
+			
+			while (vorhandeneZahl(0, rndMan,pairMemory)==true){
+				rndMan = menArray[rng.nextInt(menArray.length)];
+				System.out.println("Neue Zuf�llige Mann: "+rndMan);
+			}
+				activePairs[i][0]= rndMan;
+				pairMemory[i][0]= rndMan;	
+				System.out.println(" M�nner aus PairMemory: " + pairMemory[i][0]);
+			
+			while (vorhandeneZahl(1, rndWoman,pairMemory)==true) {
+				rndWoman = womenArray[rng.nextInt(womenArray.length)];
+				System.out.println("Neue Zuf�llige Frau: "+rndWoman);
+			}			
+				activePairs[i][1]= rndWoman;
+				pairMemory[i][1]= rndWoman;		
+				System.out.println("Frauem aus PairMemory: "+ pairMemory[i][1]);
+>>>>>>> 2fe8871ead09c7edb681c7eb81e8a45ac5c74957
 		}
 		printPairs(activePairs);
 	}
@@ -185,7 +227,11 @@ public class SpeedWindow extends JFrame {
 				bool = false;
 		return bool;
 	}
+	
+	int rundenZaehler=0;
+	BackendLogic cooleLogik = new BackendLogic();
 	public void printPairs(int [][] paarListe) {
+<<<<<<< HEAD
 		String FinalAusgabe = "";
 		for (int i=0; i<paarListe.length; i++) {
 			FinalAusgabe = FinalAusgabe + "\n" + paarListe[i][0] + "    " + paarListe[i][1];
@@ -193,5 +239,30 @@ public class SpeedWindow extends JFrame {
 		}
 		FinalAusgabe = "Paare: " + FinalAusgabe;
 		paarAusgabe.setText(FinalAusgabe);
+=======
+		String finalAusgabe = "";
+		 int anzahlMaenner = readText()[0];
+		 int anzahlFrauen = readText()[1];
+		 cooleLogik.setAnzahlFrauen(anzahlFrauen);
+		 cooleLogik.setAnzahlMaenner(anzahlMaenner);
+		 if (rundenZaehler==0) {
+			 cooleLogik.initialisiereSpeicher();
+			 rundenZaehler+=1;
+		 }
+		
+		 
+
+//		for (int i=0; i<paarListe.length; i++) {
+//			FinalAusgabe = FinalAusgabe + "\n" + paarListe[i][0] + "  " + paarListe[i][1];
+//			System.out.println(paarListe[i][0] + "  " + paarListe[i][1]);
+//		}
+//		FinalAusgabe = "Paare: " + FinalAusgabe;
+		
+		
+		
+		finalAusgabe= cooleLogik.starteMatching();
+		
+		paarAusgabe.setText(finalAusgabe);
+>>>>>>> 2fe8871ead09c7edb681c7eb81e8a45ac5c74957
 	}
 }
