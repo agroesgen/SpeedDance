@@ -20,7 +20,7 @@ public class SpeedController implements ActionListener {
 			System.out.println(""+ win.readText()[0] + "   " + win.readText()[1]);
 		}
 		
-		win.createPairs();
+		win.start();
 	}
 	
 }
