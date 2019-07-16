@@ -53,9 +53,10 @@ public class BackendLogic {
 					else {
 						moeglichePaare.add(paar);
 						aktuelleFrau++;
+						i++;
 					}
 				
-					i++;
+					
 				
 			}
 		}
@@ -69,7 +70,7 @@ public class BackendLogic {
 		String aktuellePaare="";
 	
 		float verhindereFreeze=1;
-		
+		System.out.println(moeglichePaare);
 		if (shuffleCounter<maxKombinationen) {
 			LinkedList<Integer> ausgewaehlteMaenner = new LinkedList<Integer>();
 			LinkedList<Integer> ausgewaehlteFrauen = new LinkedList<Integer>();
