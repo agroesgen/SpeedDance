@@ -68,7 +68,7 @@ public class BackendLogic {
 	public String starteMatching () {
 		String aktuellePaare="";
 	
-		
+		System.out.println(moeglichePaare);
 		
 		
 		if (shuffleCounter<maxKombinationen) {
@@ -83,7 +83,14 @@ public class BackendLogic {
 				selectedPaar = moeglichePaare.get(randomPick);
 				
 				if(ausgewaehlteMaenner.contains(selectedPaar.get(0))|| ausgewaehlteFrauen.contains(selectedPaar.get(1))) {
+					if (moeglichePaare.size()<=kleinereMenge) {
+						shuffleCounter=maxKombinationen;
+						break;
+					}
+					shuffleCounter+=1;
+					pickCounter+=1;
 					
+				
 					
 				}
 					
@@ -101,6 +108,9 @@ public class BackendLogic {
 			}
 			}
 			
+			else {
+				shuffleCounter = maxKombinationen;
+			}
 			
 			
 		}
