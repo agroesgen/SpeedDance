@@ -4,8 +4,12 @@ public class BackendLogic {
 	
 	private int anzahlMaenner;
 	private int anzahlFrauen;
-	 
+	private int maxKombinationen; 
+	private int shuffleCounter;
+	private int kleinereMenge;
 	
+	LinkedList<LinkedList<Integer>> moeglichePaare =new LinkedList<LinkedList<Integer>>();
+
 	
 	public void setAnzahlMaenner(int anzahlMaenner) {
 		this.anzahlMaenner=anzahlMaenner;
@@ -18,39 +22,118 @@ public class BackendLogic {
 	}
 	
 	
-	/*Speichert die bisher schon gemachen Paare ausgehend von
-		der kleineren Anzahl an Leuten*/
-    LinkedList<LinkedList<Integer>> speicherVonPaaren;
-	LinkedList<Integer> partnerinnen;
 	
-	public void initialisiereSpeicher () {
-		System.out.println("speicher wurde initialisiert");
-		speicherVonPaaren = new LinkedList<LinkedList<Integer>>();
-		for (int i=0;i<anzahlMaenner;i++) {
-			partnerinnen = new LinkedList<Integer>();
-			speicherVonPaaren.add(i, partnerinnen);
+	void setMoeglichePaare () {
+		
+		if (anzahlFrauen<anzahlMaenner) {
+			kleinereMenge = anzahlFrauen;
 		}
+		else {
+			kleinereMenge = anzahlMaenner;
+		}
+		
+		shuffleCounter = 0;
+		maxKombinationen = anzahlFrauen*anzahlMaenner;
+		int aktuelleFrau=0;
+		int aktuellerMann=0;
+		for (int i = 0; i<maxKombinationen;) {
+			for (aktuelleFrau=0;aktuelleFrau<anzahlFrauen;) {
+				
+				if (aktuellerMann>=anzahlMaenner) {
+					aktuellerMann = 0;
+				}
+					
+					LinkedList<Integer> paar = new LinkedList<Integer>();
+					paar.add(aktuellerMann+1);
+					paar.add(aktuelleFrau+1);
+					
+					if (moeglichePaare.contains(paar)) {
+						aktuellerMann++;
+					}
+					else {
+						moeglichePaare.add(paar);
+						aktuelleFrau++;
+						i++;
+					}
+				
+					
+				
+			}
+		}
+		
+		
+		
 	}
-	
-	
+
+		
 	public String starteMatching () {
 		String aktuellePaare="";
-		LinkedList<Integer> bereitsGewaehlteFrauen = new LinkedList<Integer>();
-		if (speicherVonPaaren == null)
-			initialisiereSpeicher();
-		for (int i=0;i<speicherVonPaaren.size();i++) {
-			LinkedList<Integer> bereitsGematchtePaare=speicherVonPaaren.get(i);
-			int randomFrau = (int) ((Math.random()*100)%anzahlFrauen)+1;
-			while(bereitsGematchtePaare.contains(randomFrau) || bereitsGewaehlteFrauen.contains(randomFrau)) {
-				 randomFrau = (int) ((Math.random()*100)%anzahlFrauen)+1;
+		int number=0;
+	
+		float verhindereFreeze=1;
+		if (shuffleCounter<maxKombinationen) {
+			LinkedList<Integer> ausgewaehlteMaenner = new LinkedList<Integer>();
+			LinkedList<Integer> ausgewaehlteFrauen = new LinkedList<Integer>();
+			LinkedList<Integer> selectedPaar;
+			if (!moeglichePaare.isEmpty()) {
+				number=1;
+			int pickCounter = 0;
+			int randomPick = 0;
+			verhindereFreeze=0;
+
+				while (pickCounter<kleinereMenge) {
+				if (moeglichePaare.isEmpty()) {
+					shuffleCounter = maxKombinationen;
+					break;
+				}
+				randomPick = (int) ((Math.random()*1000)%moeglichePaare.size());
+				selectedPaar = moeglichePaare.get(randomPick);
+				if(ausgewaehlteMaenner.contains(selectedPaar.get(0))|| ausgewaehlteFrauen.contains(selectedPaar.get(1))) {
+					
+					
+					if(verhindereFreeze>maxKombinationen) {
+					pickCounter+=1;
+					verhindereFreeze=0;
+					}
+					
+					verhindereFreeze+=0.1/maxKombinationen;
+					
+				}
+					
+				
+				else {
+					
+				aktuellePaare +=" " +number+ " " + selectedPaar + " \n";
+				ausgewaehlteMaenner.add(selectedPaar.get(0));
+				ausgewaehlteFrauen.add(selectedPaar.get(1));
+				moeglichePaare.remove(randomPick);
+				shuffleCounter+=1;
+				pickCounter+=1;
+				number+=1;
+				
+				}
 			}
-			bereitsGewaehlteFrauen.add(randomFrau);
-			speicherVonPaaren.get(i).add(randomFrau);
+			}
 			
-			aktuellePaare += ""+(i+1)+" " + randomFrau + " \n";
+			else {
+				shuffleCounter = maxKombinationen;
+			}
+			
+			
 		}
+		
+		else {
+			aktuellePaare = "alle möglichen Kombinationen ausgeschöpft.";
+		}
+		
+		
+		
 		return aktuellePaare;
 	}
+	
+	
+	
+
 
 
 	
