@@ -80,6 +80,10 @@ public class BackendLogic {
 			verhindereFreeze=0;
 
 				while (pickCounter<kleinereMenge) {
+				if (moeglichePaare.isEmpty()) {
+					shuffleCounter = maxKombinationen;
+					break;
+				}
 				randomPick = (int) ((Math.random()*100)%moeglichePaare.size());
 				selectedPaar = moeglichePaare.get(randomPick);
 				
