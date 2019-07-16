@@ -68,8 +68,7 @@ public class BackendLogic {
 	public String starteMatching () {
 		String aktuellePaare="";
 	
-		System.out.println(moeglichePaare);
-		
+		float verhindereFreeze=1;
 		
 		if (shuffleCounter<maxKombinationen) {
 			LinkedList<Integer> ausgewaehlteMaenner = new LinkedList<Integer>();
@@ -78,19 +77,22 @@ public class BackendLogic {
 			if (!moeglichePaare.isEmpty()) {
 			int pickCounter = 0;
 			int randomPick = 0;
+			verhindereFreeze=0;
+
 				while (pickCounter<kleinereMenge) {
 				randomPick = (int) ((Math.random()*100)%moeglichePaare.size());
 				selectedPaar = moeglichePaare.get(randomPick);
 				
 				if(ausgewaehlteMaenner.contains(selectedPaar.get(0))|| ausgewaehlteFrauen.contains(selectedPaar.get(1))) {
-					if (moeglichePaare.size()<=kleinereMenge) {
-						shuffleCounter=maxKombinationen;
-						break;
-					}
+					
+					
+					if(verhindereFreeze>maxKombinationen) {
 					shuffleCounter+=1;
 					pickCounter+=1;
 					
-				
+					}
+					
+					verhindereFreeze+=0.1/maxKombinationen;
 					
 				}
 					
